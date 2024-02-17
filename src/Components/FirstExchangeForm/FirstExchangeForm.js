@@ -24,12 +24,14 @@ export default function FirsExchangeForm() {
                 setIsLoaded(true)
                 setSelectedCoinForSell(data[0])
                 setSelectedCoinForBuy(data[5])
-            },(error)=>{console.log(error);});
-       
+            },(error)=>{
+                setIsLoaded(false)
+                console.log(error);
+            });
        
     }, [])
 
-
+   
     
 
     function handleChangeFirstInput(event) {
@@ -38,16 +40,18 @@ export default function FirsExchangeForm() {
         }
     }
 
-    if (!isLoaded) {
-        return (<div className="styles__Layout-sc-y0viyd-0 MbtXp main-form" style={{width: "100%",
-            maxWidth: "680px",
-            borderradius: "16px",
-            background: "#fff",
-            margin:"auto"
-        }}>Loading...</div>)
+    if (isLoaded === false || yourApiKey.length === 0) {
+        return (
+            <div className="styles__Layout-sc-y0viyd-0 MbtXp main-form loading" style={{background: "#062763"}}>
+                <div className="circles">
+                    <div className="circle-multiple">
+                        <div className="circle" />
+                    </div>
+                </div>
+            </div>
+        )
     }
     else {
-
         return (
             <>
                 <div className="global__NewContainer-sc-1hzbvz7-1 ePDBUC">
